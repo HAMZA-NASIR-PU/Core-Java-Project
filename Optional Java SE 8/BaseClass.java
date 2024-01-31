@@ -30,11 +30,12 @@ class BaseClass {
         System.out.println("BaseClass b4 = " + b4.value);
         
         
-        BaseClass b5 = null;
-        Optional<BaseClass> o6 = Optional.ofNullable(b5);
-        b5 = o6.orElseThrow(()-> new ClassNotFoundException("orElseThrow example"));
+        // BaseClass b5 = null;
+        // Optional<BaseClass> o6 = Optional.ofNullable(b5);
+        // b5 = o6.orElseThrow(()-> new ClassNotFoundException("orElseThrow example"));
+        
+        
         // o6.orElseThrow(()->new ClassNotFoundException("HELLO WORLD"));
-        
-        
+                
     }
 }
