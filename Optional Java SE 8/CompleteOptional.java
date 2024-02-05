@@ -62,6 +62,7 @@ class CompleteOptional {
         System.out.println(myStr13.map(s -> Optional.of(s)));
 
         System.out.println(myStr13.flatMap(s -> Optional.of(s)));
+        
 
     }
 }
