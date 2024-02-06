@@ -27,6 +27,13 @@ class BuiltinFunctionalInterface {
         System.out.println("UnaryOperator result = " + u1.apply(5));
 
         /************* PREDICATE CHAINING ******/
+
+        Predicate<String> notNull = (s) -> (s != null && s.length() > 0);
+        Predicate<String> minimumLength = (s) -> (s.length() >= 10);
+        Predicate<String> maximumLength = (s) -> (s.length() <= 20);
+
+        System.out.println("Is HELLO WORLD a valid string? = "
+                + notNull.and(minimumLength).and(maximumLength).test("HELLO WORLD"));
     }
 
 }
