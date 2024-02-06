@@ -7,6 +7,7 @@ public class MyPractice {
 		this.value = value;
 	}
 
+	@SuppressWarnings("unused")
 	public static void main(String[] args) throws ClassNotFoundException {
 		MyPractice m1 = new MyPractice(1);
 		Optional<MyPractice> o1 = Optional.of(m1);

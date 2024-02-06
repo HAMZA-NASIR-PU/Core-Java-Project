@@ -1,7 +1,8 @@
 import java.util.function.Predicate;
 
 public class WorkflowAutomationExample {
-    public static void main(String[] args) {
+    @SuppressWarnings("unused")
+	public static void main(String[] args) {
         // Mock workflow condition
         boolean isDataAvailable = true;
         boolean hasPermission = true;
