@@ -1,11 +1,11 @@
 import java.util.List;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.stream.Stream;
 import java.util.function.Predicate;
 import java.util.function.Function;
 
 class ExampleCode {
+    @SuppressWarnings("unused")
     public static void main(String[] args) {
         List<Integer> nums = Arrays.asList(5, 4, 7, 8, 9);
 
