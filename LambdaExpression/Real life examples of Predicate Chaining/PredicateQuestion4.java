@@ -1,7 +1,9 @@
 // Certainly! Here's another advanced Java interview question:
 
 // Question:
-// You are given a list of employees, each represented by an Employee class with attributes such as name, department, salary, and age. Write a Java program to find the average salary of employees in each department. Additionally, find the department with the highest average salary.
+// You are given a list of employees, each represented by an Employee class with attributes such as name, department, salary
+// , and age. Write a Java program to find the average salary of employees in each department. Additionally, find the department 
+// with the highest average salary.
 
 // Please provide the code using Java 8 Stream API and any necessary classes or interfaces.
 
