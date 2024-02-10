@@ -1,14 +1,3 @@
-// Certainly! Here's another advanced Java interview question:
-
-// Question:
-// You are given a list of employees, each represented by an Employee class with attributes such as name, department, salary
-// , and age. Write a Java program to find the average salary of employees in each department. Additionally, find the department 
-// with the highest average salary.
-
-// Please provide the code using Java 8 Stream API and any necessary classes or interfaces.
-
-// Feel free to take your time to write the code, and I'll be here to provide guidance or feedback if needed.
-
 import java.util.List;
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -86,30 +75,36 @@ public class PredicateQuestion4 {
     }
 
     public static void main(String[] args) {
-
-        List<Employee> emp = getEmployees();
-
-        Map<String, List<Employee>> data = emp.stream().collect(Collectors.groupingBy(Employee::getDepartment));
-
-        // System.out.println(data);
-
-        // for(Map.Entry<String, List<Employee>> entry: data.entrySet()) {
-        // System.out.println("**********************************************************************************");
-        // System.out.println(entry);
-        // System.out.println("Average salary in department " + entry.getKey() + " " +
-        // entry.getValue().stream().mapToDouble(Employee::getSalary).average().getAsDouble());
-        // System.out.println("**********************************************************************************");
-        // }
-
-        Map<String, Double> averageSalaryByDepartment = new HashMap<String, Double>();
-        for (Map.Entry<String, List<Employee>> entry : data.entrySet()) {
-            double averageSalary = entry.getValue().stream().mapToDouble(Employee::getSalary).average().getAsDouble();
-            averageSalaryByDepartment.put(entry.getKey(), averageSalary);
-        }
-        System.out.println(averageSalaryByDepartment);
-
+        List<Employee> employees = getEmployees();
+        
+        Map<String, List<Employee>> groupedByDepartment = employees.stream().collect(Collectors.groupingBy(Employee::getDepartment));
+        
+        // System.out.println(groupedByDepartment);
+        
+        // groupedByDepartment.forEach((key, value) -> {
+        //     System.out.println("*********************************************");
+        //     System.out.println(key + " ==> " + value);
+        //     System.out.println("*********************************************");
+        // });
+        
+        Map<String, Double> data = new HashMap<String, Double>();
+        
+        groupedByDepartment.forEach((key, value) -> {
+            System.out.println("*********************************************");
+            System.out.println(key + " ==> " + value.stream().map(Employee::getSalary).collect(Collectors.toList()));
+            double averageSalaryInDepartment = value.stream().mapToDouble(Employee::getSalary).average().orElse(0.0);
+            System.out.println("Average salary in drpartment " + key + " = " + averageSalaryInDepartment);
+            System.out.println("*********************************************");
+            
+            data.put(key, averageSalaryInDepartment);
+            
+            //mapToDouble returns "DoubleStream" object.
+            //average() returns "OptionalDouble" object.
+            //orElse(0.0) returns a "double" primitive type object.
+        });
+        
         // Finding the department with the highest average salary
-        String departmentWithHighestAverageSalary = averageSalaryByDepartment.entrySet().stream()
+        String departmentWithHighestAverageSalary = data.entrySet().stream()
                 .max(Map.Entry.comparingByValue())
                 .map(Map.Entry::getKey)
                 .orElse("No department found");
