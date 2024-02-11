@@ -1,3 +1,12 @@
+
+// Sure! Here's another question:
+
+// In a school's grading system, each student takes multiple courses, and each course has multiple assignments. Each assignment has a score. Using flatMap(), 
+// how would you calculate the average score of all assignments for each student?
+
+// Feel free to provide your solution or discuss how you would approach solving this problem using flatMap().
+
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
