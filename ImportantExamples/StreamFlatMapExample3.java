@@ -66,7 +66,7 @@ class Student {
         return courses;
     }
 }
-class FlatMapExample3 {
+class StreamFlatMapExample3 {
     public static void main(String[] args) {
         List<Student> students = initializeStudents();
         
