@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set; //interface
 import java.util.HashSet;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 class FindMaxKeyAndValueMethod2 {
     
@@ -26,7 +27,11 @@ class FindMaxKeyAndValueMethod2 {
     {
         if(map.isEmpty()) return null;
         
-        Optional<Map.Entry<Integer, Integer>> maxEntry = map.entrySet().stream().max(Map.Entry.comparingByValue());
+        Stream<Map.Entry<Integer, Integer>> stream = map.entrySet().stream();
+        
+        Optional<Map.Entry<Integer, Integer>> maxEntry = stream.max(Map.Entry.comparingByValue());
+        
+        // Optional<Map.Entry<Integer, Integer>> maxEntry = map.entrySet().stream().max(Map.Entry.comparingByValue());
         
         Integer maxKey = maxEntry.map(Map.Entry::getKey).orElse(null);
         
