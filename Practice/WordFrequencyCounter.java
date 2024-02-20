@@ -15,5 +15,9 @@ class WordFrequencyCounter {
         for(String word:words) {
             wordFrequencyMap.put(word, wordFrequencyMap.getOrDefault(word, 0) + 1);
         }
+        
+        for(Map.Entry<String, Integer> entry : wordFrequencyMap.entrySet()) {
+            System.out.println("Word: " + entry.getKey() + ", Frequency: " + entry.getValue());
+        }
     }
 }
