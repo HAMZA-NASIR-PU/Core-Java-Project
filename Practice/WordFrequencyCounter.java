@@ -1,6 +1,7 @@
 import java.util.Map;
 import java.util.HashMap;
 
+
 class WordFrequencyCounter {
     public static void main(String[] args) {
         String text = "Lorem ipsum dolor sit amet consectetur adipiscing elit " +
