@@ -14,15 +14,16 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
 
-  spring-app:
-    image: openjdk:11-jre-slim
+  spring_service:
     build:
       context: .
       dockerfile: Dockerfile
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql_service:3306/mydatabase
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql_service:3306/mydatabase?sessionVariables=sql_mode='NO_ENGINE_SUBSTITUTION'&jdbcCompliantTruncation=false
       SPRING_DATASOURCE_USERNAME: myuser
       SPRING_DATASOURCE_PASSWORD: mypassword
+    ports:
+      - "8081:8080"
     networks:
       - mynetwork
     depends_on:
