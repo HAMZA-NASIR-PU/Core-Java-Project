@@ -1,0 +1,10 @@
+docker network create mongo-network
+
+docker run -d -p 27018:27017 -e MONGO_INITDB_ROOT_USERNAME=admin -e MONGO_INITDB_ROOT_PASSWORD=supersecret --network mongo-network --name mongodb mongo
+
+docker run -d -p 8081:8081 -e ME_CONFIG_MONGODB_ADMINUSERNAME=admin -e ME_CONFIG_MONGODB_ADMINPASSWORD=supersecret -e ME_CONFIG_MONGODB_SERVER=mongodb --network mongo-network --name mongo-express mongo-express
+
+docker-compose -f mongo-services.yml up
+docker-compose -f mongo-services.yml up -d
+docker-compose -f mongo-services.yml down
+docker-compose -f mongo-services.yml stop
