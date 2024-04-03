@@ -1,22 +1,19 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
+import { ChildComponent } from './child/child.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FormsModule],
+  imports: [RouterOutlet, ChildComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
   title = 'my-proj';
-  inputValue: string | undefined;
+  @ViewChild(ChildComponent) childComp: ChildComponent | undefined;
 
-  @ViewChild("myInput", { static: false }) myInput!: ElementRef;
-
-  getValue(inputEl : HTMLInputElement) {
-    const value = inputEl.value;
-    console.log(value);
+  callChildMethod() {
+    this.childComp?.childMethod();
   }
 }
