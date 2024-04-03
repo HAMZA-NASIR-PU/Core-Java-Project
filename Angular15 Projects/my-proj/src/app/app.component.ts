@@ -15,9 +15,8 @@ export class AppComponent {
 
   @ViewChild("myInput", { static: false }) myInput!: ElementRef;
 
-  getValue() {
-    const inputElement: HTMLInputElement = this.myInput.nativeElement;
-    const value = inputElement.value;
+  getValue(inputEl : HTMLInputElement) {
+    const value = inputEl.value;
     console.log(value);
   }
 }
