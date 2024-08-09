@@ -46,3 +46,45 @@ public class MyPredicate implements Predicate<Integer> {
 ```
 
 `Explanation: You can create your class by implementing the Predicate interface and overriding the test method or create a more concise code by lamdba expressions. Notice the target assignment of the lambda expression is Predicate<Integer> as it runs a test condition on an integer value.`
+
+### Java Predicate Interface Examples
+
+1. Predicate Chaining with "and" Method
+
+```java
+import java.util.function.Predicate;
+
+public class PredicateChainingWithAndExample {
+    public static void main(String[] args) {
+        Predicate<String> isNonEmpty = str -> !str.isEmpty();
+        Predicate<String> startsWithA = str -> str.startsWith("A");
+
+        Predicate<String> combinedPredicate = isNonEmpty.and(startsWithA);
+
+        System.out.println(combinedPredicate.test("Apple")); // true
+        System.out.println(combinedPredicate.test("")); // false
+        System.out.println(combinedPredicate.test("Banana")); // false
+    }
+}
+```
+
+2.  Predicate Chaining with or Method
+
+```java
+import java.util.function.Predicate;
+
+public class PredicateChainingWithOrExample2 {
+    public static void main(String[] args) {
+        Predicate<String> lengthGreaterThanFive = str -> str.length() > 5;
+        Predicate<String> endsWithZ = str -> str.endsWith("z");
+
+        Predicate<String> combinedPredicate = lengthGreaterThanFive.or(endsWithZ);
+
+        System.out.println(combinedPredicate.test("hello")); // false (length <= 5 and does not end with 'z')
+        System.out.println(combinedPredicate.test("worldz")); // true (ends with 'z')
+        System.out.println(combinedPredicate.test("java")); // false (length <= 5 and does not end with 'z')
+        System.out.println(combinedPredicate.test("amazing")); // true (length > 5)
+        System.out.println(combinedPredicate.test("buzz")); // true (ends with 'z')
+    }
+}
+```
