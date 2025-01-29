@@ -218,6 +218,26 @@ Let's use an array list as an example. This is what is inside the array list:
 Now if I call Iterable.forEach() and pass in System.out::print(), 13680 will be printed. This is because Iterable.forEach iterates through the whole sequence of elements.
 On the other hand, if I get the Iterator of the array list and called next twice, before calling forEachRemaining with System.out::print(), 680 will be printed. The Iterator has already iterated through the first two elements, so the "remaining" ones are 6, 8 and 0.
 
+```java
+import java.util.Iterator;
+import java.util.Map;
+import java.util.HashMap;
+
+class Main {
+    public static void main(String[] args) {
+        Map<String, String> mp = new HashMap<String, String>();
+        mp.put("A", "1");
+        mp.put("B", "2");
+        mp.put("C", "3");
+        
+        Iterator<String> it = mp.keySet().iterator();
+        System.out.println(it.next());
+        System.out.println(it.next());
+        it.forEachRemaining(el -> System.out.println(el));
+    }
+}
+```
+
 ## <img src="https://user-images.githubusercontent.com/74038190/212257467-871d32b7-e401-42e8-a166-fcfd7baa4c6b.gif" width ="25" style="margin-bottom: -5px;"> How to throw `java.util.NoSuchElementException`
 
 ```java
