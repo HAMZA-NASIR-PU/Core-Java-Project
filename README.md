@@ -88,3 +88,81 @@ public class PredicateChainingWithOrExample2 {
     }
 }
 ```
+
+## <img src="https://user-images.githubusercontent.com/74038190/212257467-871d32b7-e401-42e8-a166-fcfd7baa4c6b.gif" width ="25" style="margin-bottom: -5px;"> Fail Fast and Fail Safe Iterators in Java
+
+Using iterations we can traverse over the collections objects. The iterators can be either fail-safe or fail-fast. Fail-safe iterators means they will not throw any exception even if the collection is modified while iterating over it. Whereas Fail-fast iterators throw an exception(ConcurrentModificationException) if the collection is modified while iterating over it.
+
+Consider an example:
+
+```java
+ArrayList<Integer> integers = new ArrayList<>();
+integers.add(1);
+integers.add(2);
+integers.add(3);
+Iterator<Integer> itr = integers.iterator();
+while (itr.hasNext()) {
+    Integer a = itr.next();
+    integers.remove(a);
+}
+```
+
+As arrayLists are fail-fast above code will throw an exception.
+First a will have value = 1, and then 1 will be removed in same iteration.
+Next when a will try to get next(), as the modification is made to the list, it will throw an exception here.
+
+
+However if we use an fail-safe collection e.g. CopyOnWriteArrayList then no exception will occur:
+
+```java
+List<Integer> integers = new CopyOnWriteArrayList<>();
+integers.add(1);
+integers.add(2);
+integers.add(3);
+Iterator<Integer> itr = integers.iterator();
+while (itr.hasNext()) {
+    Integer a = itr.next();
+    integers.remove(a);
+}
+```
+Here if we print the element a, then all the elements will be printed.
+
+```java
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
+public class FailFastExample {
+    public static void main(String[] args)
+    {
+        Map<String, String> cityCode
+            = new HashMap<String, String>();
+        cityCode.put("Delhi", "India");
+        cityCode.put("Moscow", "Russia");
+        cityCode.put("New York", "USA");
+
+        Iterator iterator = cityCode.keySet().iterator();
+
+        while (iterator.hasNext()) {
+            System.out.println(
+                cityCode.get(iterator.next()));
+
+            // adding an element to Map
+            // exception will be thrown on next call
+            // of next() method.
+            cityCode.put("Istanbul", "Turkey");
+        }
+    }
+}
+```
+
+### Important points of fail-fast iterators :
+
+- These iterators throw ConcurrentModificationException if a collection is modified while iterating over it.
+- They use original collection to traverse over the elements of the collection.
+- These iterators don’t require extra memory.
+- Ex : Iterators returned by ArrayList, Vector, HashMap.
+
+
+
+
