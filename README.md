@@ -156,6 +156,47 @@ public class FailFastExample {
 }
 ```
 
+#### Very interesting Code
+
+```java
+// Java code to illustrate
+// Fail Fast Iterator in Java
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
+class Main {
+    public static void main(String[] args)
+    {
+        Map<String, String> cityCode
+            = new HashMap<String, String>();
+        cityCode.put("Delhi", "India");
+        cityCode.put("Moscow", "Russia");
+        cityCode.put("New York", "USA");
+
+        Iterator iterator1 = cityCode.keySet().iterator();
+        
+        cityCode.put("Istanbul", "Turkey");
+        
+        // This line throws java.util.ConcurrentModificationException exception.
+        // If you comment that line, then no exception is thrown.
+        // System.out.println("Using iterator 1:" + cityCode.get(iterator1.next()));
+        
+        Iterator iterator2 = cityCode.keySet().iterator();
+        System.out.println("Using iterator 2:" + cityCode.get(iterator2.next()));
+
+        // while (iterator.hasNext()) {
+        //     System.out.println(
+        //         cityCode.get(iterator.next()));
+
+        //     // adding an element to Map
+        //     // exception will be thrown on next call
+        //     // of next() method.
+        //     cityCode.put("Istanbul", "Turkey");
+        // }
+    }
+}
+```
 ### Important points of fail-fast iterators :
 
 - These iterators throw ConcurrentModificationException if a collection is modified while iterating over it.
