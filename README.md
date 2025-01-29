@@ -205,5 +205,17 @@ class Main {
 - Ex : Iterators returned by ArrayList, Vector, HashMap.
 
 
+## <img src="https://user-images.githubusercontent.com/74038190/212257467-871d32b7-e401-42e8-a166-fcfd7baa4c6b.gif" width ="25" style="margin-bottom: -5px;"> What's the point of having both Iterator.forEachRemaining() and Iterable.forEach()?
+
+To understand why the two methods both exist, you need to first understand what are Iterator and Iterable.
+An Iterator basically is something that has a "next element" and usually, an end.
+An Iterable is something that contains elements in a finite or infinite sequence and hence, can be iterated over by keep getting the next element. In other words, Iterables can be iterated over by Iterators.
+Now that you understand this, I can talk about what's the difference between the two methods in question.
+Let's use an array list as an example. This is what is inside the array list:
+```sql
+[1, 3, 6, 8, 0]
+```
+Now if I call Iterable.forEach() and pass in System.out::print(), 13680 will be printed. This is because Iterable.forEach iterates through the whole sequence of elements.
+On the other hand, if I get the Iterator of the array list and called next twice, before calling forEachRemaining with System.out::print(), 680 will be printed. The Iterator has already iterated through the first two elements, so the "remaining" ones are 6, 8 and 0.
 
 
