@@ -263,3 +263,45 @@ class Main {
     }
 }
 ```
+
+
+## <img src="https://user-images.githubusercontent.com/74038190/212257467-871d32b7-e401-42e8-a166-fcfd7baa4c6b.gif" width ="25" style="margin-bottom: -5px;"> Which Java Collection Interfaces Can Stream Like a Pro?
+
+In Java, the **`Stream`** interface is part of the `java.util.stream` package, introduced in **Java 8**. It is **not** implemented by any collection interfaces directly. However, some collection interfaces provide methods that return a **Stream**.
+
+### 1. **Collection Interface (`java.util.Collection`)**
+   - The **`Collection`** interface (super interface for `List`, `Set`, and `Queue`) **does not implement `Stream`**, but it provides a **`stream()`** method:
+     ```java
+     default Stream<E> stream()
+     ```
+     This allows any collection to generate a stream.
+
+### 2. **Implementations That Provide Streams**
+   Since `Collection` provides `stream()`, all of its subinterfaces (e.g., `List`, `Set`, `Queue`) can produce a `Stream`. This includes:
+   - `List` (e.g., `ArrayList`, `LinkedList`)
+   - `Set` (e.g., `HashSet`, `TreeSet`)
+   - `Queue` (e.g., `PriorityQueue`, `ArrayDeque`)
+
+   **Example:**
+   ```java
+   List<String> list = Arrays.asList("A", "B", "C");
+   Stream<String> stream = list.stream();
+   ```
+
+### 3. **`Map` Does Not Extend `Collection`**
+   - `Map<K, V>` (e.g., `HashMap`, `TreeMap`) does **not** extend `Collection`, so it does **not** have a `stream()` method.
+   - However, you can stream its **keys**, **values**, or **entries**:
+     ```java
+     Map<Integer, String> map = new HashMap<>();
+     map.put(1, "One");
+     map.put(2, "Two");
+
+     Stream<Integer> keyStream = map.keySet().stream();
+     Stream<String> valueStream = map.values().stream();
+     Stream<Map.Entry<Integer, String>> entryStream = map.entrySet().stream();
+     ```
+
+### **Conclusion**
+- **No collection interface directly implements `Stream`.**
+- **`Collection` and its subinterfaces provide the `stream()` method.**
+- **`Map` does not implement `Collection`, but its keys, values, and entries can be streamed.**
