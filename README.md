@@ -305,3 +305,33 @@ In Java, the **`Stream`** interface is part of the `java.util.stream` package, i
 - **No collection interface directly implements `Stream`.**
 - **`Collection` and its subinterfaces provide the `stream()` method.**
 - **`Map` does not implement `Collection`, but its keys, values, and entries can be streamed.**
+
+## <img src="https://user-images.githubusercontent.com/74038190/212257467-871d32b7-e401-42e8-a166-fcfd7baa4c6b.gif" width ="25" style="margin-bottom: -5px;"> List of classes that implements the java.util.Collection interface
+
+
+Several classes in Java implement the `java.util.Collection` interface.  Here's a list of some of the most common ones, categorized for clarity:
+
+**Core Interface Implementations (Abstract Data Types):**
+
+* **`java.util.ArrayList`:** A dynamic array implementation.  Good for general-purpose use, fast access by index.
+* **`java.util.LinkedList`:** A doubly-linked list implementation.  Good for frequent insertions and deletions, but slower random access.
+* **`java.util.HashSet`:** Implements the `Set` interface (which extends `Collection`).  Stores unique elements in no particular order.  Uses hashing for fast lookups.
+* **`java.util.LinkedHashSet`:**  A `HashSet` that maintains the order in which elements were inserted.
+* **`java.util.TreeSet`:** Implements the `SortedSet` interface (which extends `Set`). Stores elements in a sorted order (either natural ordering or according to a `Comparator`).
+* **`java.util.ArrayDeque`:** Implements the `Deque` interface (which extends `Collection`).  A double-ended queue.  Can be used as a stack or a queue.
+
+**Classes related to Maps (Note: Maps themselves do *not* implement Collection, but their *values* or *entrySet* can be viewed as Collections):**
+
+While `Map` itself doesn't implement `Collection`, you can get `Collection` views of its data:
+
+* `map.values()`: Returns a `Collection` view of the values in the map.
+* `map.entrySet()`: Returns a `Set` view of the key-value pairs (entries) in the map.  Each entry is a `Map.Entry` object.
+* `map.keySet()`: Returns a `Set` view of the keys in the map.
+
+**Other Collection-related Classes (Less Frequently Used Directly):**
+
+* `java.util.Vector` (Legacy):  An older, synchronized version of `ArrayList`.  Generally, `ArrayList` is preferred unless thread safety is explicitly required.  For thread safety, `Collections.synchronizedList()` or `CopyOnWriteArrayList` are often better choices.
+* `java.util.Stack` (Legacy):  An older class that extends `Vector` and represents a LIFO (Last-In, First-Out) stack. `ArrayDeque` is usually preferred for stack implementations now.
+* `java.util.PriorityQueue`:  A queue where elements are ordered according to their priority (using a `Comparator` or natural ordering).
+
+**Important Note about Interfaces:** Remember that `Set`, `SortedSet`, `NavigableSet`, `Queue`, `Deque`, and `List` are *interfaces* that *extend* the `Collection` interface.  The classes listed above are concrete implementations of these interfaces.  For example, `HashSet` *implements* the `Set` interface, which in turn *extends* the `Collection` interface.
