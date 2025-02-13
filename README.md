@@ -335,3 +335,31 @@ While `Map` itself doesn't implement `Collection`, you can get `Collection` view
 * `java.util.PriorityQueue`:  A queue where elements are ordered according to their priority (using a `Comparator` or natural ordering).
 
 **Important Note about Interfaces:** Remember that `Set`, `SortedSet`, `NavigableSet`, `Queue`, `Deque`, and `List` are *interfaces* that *extend* the `Collection` interface.  The classes listed above are concrete implementations of these interfaces.  For example, `HashSet` *implements* the `Set` interface, which in turn *extends* the `Collection` interface.
+
+
+## Java Stream Question (Just for Muscle Flexing)
+
+You have a list of integers. Write a code to filter out even numbers, multiply by each by 2, and collect the result into a new list.
+Follow-up: How would you approach change if the list contains duplicate integers and the result should contain only unique values ?
+
+``` java
+import java.util.List;
+import java.util.stream.Stream;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+class Main {
+    public static void main(String[] args) {
+        List<Integer> nums = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+
+        // distinct is for removing the duplicates in the array.
+        List<Integer> result = nums.stream()
+                .distinct()
+                .filter(num -> num % 2 == 0)
+                .map(num -> num * 2)
+                .collect(Collectors.toList());
+
+        System.out.println(result);
+    }
+}
+```
