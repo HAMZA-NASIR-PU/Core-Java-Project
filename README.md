@@ -739,6 +739,24 @@ class Main {
 This question tests the students' understanding of the upper-bounded wildcard `<? extends CharSequence>`, and it encourages them to think about interfaces, inheritance, and method availability across different classes that implement `CharSequence`.
 
 
+### Example 3
+
+The following code gives error:
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+
+class Main {
+    public static void main(String[] args) {
+        List<Integer> l1 = new ArrayList<Integer>();
+        List<? extends Number> l2 = l1;
+        List<Number> l3 = l1; // Compile-Time Error: incompatible types: List<Integer> cannot be converted to List<Number>
+        System.out.println(l2);
+    }
+}
+```
+
 ## What is `String` and `StringBuilder` in Java ?
 
 In Java, the primary difference between String and StringBuilder is mutability. 
