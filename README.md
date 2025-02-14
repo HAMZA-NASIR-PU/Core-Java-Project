@@ -672,3 +672,78 @@ For more info:
 - https://docs.oracle.com/javase/tutorial/java/generics/upperBounded.html
 
 - https://docs.oracle.com/javase/tutorial/java/generics/wildcardGuidelines.html
+
+- https://docs.oracle.com/javase/tutorial/java/generics/subtyping.html
+
+
+## Some Example Codes for understanding the internals of `Wilcard ?`
+
+```java
+import java.util.Arrays;
+import java.util.List;
+
+class Main {
+    
+    public static void printNumbers(List<? extends Number> numbers) {
+        for(Number number: numbers) {
+            System.out.println(number);
+        }
+    }
+    
+    public static void main(String[] args) {
+        List<Integer> intList = Arrays.asList(1, 2, 3, 4);
+        List<Double> doubleList = Arrays.asList(1.1, 2.2, 3.3, 4.4);
+        List<Float> floatList = Arrays.asList(1.5f, 2.3f, 3.7f, 4.1f);
+        
+        printNumbers(intList);
+        printNumbers(doubleList);
+        printNumbers(floatList);
+    }
+}
+```
+
+
+---
+
+**Question:**
+Consider the following Java code, which uses a `List<? extends CharSequence>`. The list contains elements of type `String`. Carefully analyze the code and determine what the output will be when the `main` method is executed. Explain why the output is produced based on the methods available in the `CharSequence` interface.
+
+```java
+import java.util.Arrays;
+import java.util.List;
+
+class Main {
+    
+    public static void printStringsSize(List<? extends CharSequence> charSequence) {
+        
+        for(CharSequence ch : charSequence) {
+            System.out.println(ch.length());
+        }
+        
+    }
+    
+    public static void main(String[] args) {
+        List<String> styrList = Arrays.asList("HELLO", "WORLD", "UNITED KINGDOM");
+        printStringsSize(styrList);
+    }
+}
+```
+
+**Questions:**
+1. What is the output of the above code when run?
+2. Why are we able to call the `length()` method on the elements of the list?
+3. Explain what would happen if you tried to pass a list of `StringBuilder` objects to the `printStringsSize` method instead of a list of `String`. Would it work? Why or why not?
+
+---
+
+This question tests the students' understanding of the upper-bounded wildcard `<? extends CharSequence>`, and it encourages them to think about interfaces, inheritance, and method availability across different classes that implement `CharSequence`.
+
+
+## What is `String` and `StringBuilder` in Java ?
+
+In Java, the primary difference between String and StringBuilder is mutability. 
+String objects are immutable, meaning any modification creates a new String object, leading to increased memory usage. 
+In contrast, StringBuilder is mutable, allowing in-place modifications, which makes it more memory-efficient for operations such as concatenation or manipulation within loops. 
+Additionally, StringBuilder is generally faster than StringBuffer, as it is not synchronized and thus not thread-safe
+
+For more Info: https://www.unlogged.io/post/java-and-the-string-odyssey-navigating-changes-from-jdk-1-to-jdk-21
