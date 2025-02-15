@@ -986,6 +986,58 @@ public class Main {
 2. **They cannot access the class’s type parameter (`T`).**
 3. **You can declare type parameters inside static methods separately if needed.**
 
+## Why Are Arrays Covariant but Generics Invariant in Java?
+
+https://stackoverflow.com/questions/18666710/why-are-arrays-covariant-but-generics-are-invariant
+
+In Java, **arrays are covariant**, while **generics are invariant**. This design choice is due to the differences in how arrays and generics handle type safety at runtime.
+
+---
+
+### 1. **Arrays are Covariant**
+Arrays are covariant in Java, meaning that a **subtype array can be assigned to a supertype array reference**.
+
+#### Example:
+```java
+Integer[] intArray = {1, 2, 3};
+Number[] numArray = intArray; // Allowed due to covariance
+numArray[0] = 3.14; // Runtime error: ArrayStoreException
+```
+#### Why?
+- Arrays **retain type information at runtime**.
+- The JVM performs **runtime type checks** to prevent type violations.
+- If an invalid assignment is attempted (like storing a `Double` in an `Integer[]`), **an `ArrayStoreException` is thrown**.
+
+---
+
+### 2. **Generics are Invariant**
+Generics are **invariant**, meaning that `List<Integer>` is **not** a subtype of `List<Number>`, even though `Integer` is a subtype of `Number`.
+
+#### Example:
+```java
+List<Integer> intList = new ArrayList<>();
+List<Number> numList = intList; // Compilation error
+```
+#### Why?
+- Generics **do not retain type information at runtime** due to **type erasure**.
+- Java's generics are implemented with **compile-time type checking**.
+- Allowing covariance would introduce potential runtime type safety issues.
+
+If covariance were allowed, this would be possible:
+```java
+List<Integer> intList = new ArrayList<>();
+List<Number> numList = intList; // Hypothetically allowed
+numList.add(3.14); // This would break type safety!
+Integer value = intList.get(0); // Type mismatch at runtime!
+```
+Since Java removes generic type information at runtime (due to **type erasure**), it cannot detect and prevent such type violations like it does with arrays.
+
+---
+
+### **Conclusion:**
+- Arrays are covariant because **they have runtime type checks**.
+- Generics are invariant because **they rely on compile-time checks** and **type erasure** makes runtime checks impossible.
+
 ## What is `String` and `StringBuilder` in Java ?
 
 In Java, the primary difference between String and StringBuilder is mutability. 
