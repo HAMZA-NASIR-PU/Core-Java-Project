@@ -924,6 +924,68 @@ public class Main {
 }
 ```
 
+## 🚀 Static Methods in Generic Classes – What You Must Know! ⚡
+
+A **generic class** in Java can contain **static methods**, but the static methods **cannot** access the class's generic type parameters.  
+
+### Why?  
+Generics in Java work at the instance level, meaning the type parameter `<T>` is associated with an instance of the class. However, **static methods belong to the class itself, not to a specific instance**, and they exist independently of any generic type parameter.
+
+### Example:  
+```java
+public class GenericClass<T> {
+    
+    // Instance method - Can use T
+    public void instanceMethod(T value) {
+        System.out.println("Value: " + value);
+    }
+
+    // Static method - Cannot use T
+    public static void staticMethod() {
+        System.out.println("This is a static method.");
+    }
+
+    // ❌ Compile-time error: Cannot use 'T' in a static context
+    /*
+    public static void invalidStaticMethod(T value) {
+        System.out.println(value);
+    }
+    */
+}
+
+public class Main {
+    public static void main(String[] args) {
+        GenericClass<Integer> obj = new GenericClass<>();
+        obj.instanceMethod(100); // ✅ Allowed
+
+        GenericClass.staticMethod(); // ✅ Allowed, but does not use T
+    }
+}
+```
+
+### Alternative: Using Type Parameters in Static Methods
+If you need to use generics inside a static method, **declare the type parameter inside the method itself** rather than relying on the class’s type parameter:
+
+```java
+public class Utility {
+    public static <T> void printValue(T value) {
+        System.out.println("Value: " + value);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Utility.printValue(123);       // ✅ Works with Integer
+        Utility.printValue("Hello");   // ✅ Works with String
+    }
+}
+```
+
+### Key Takeaways:
+1. **Static methods can exist in generic classes.**
+2. **They cannot access the class’s type parameter (`T`).**
+3. **You can declare type parameters inside static methods separately if needed.**
+
 ## What is `String` and `StringBuilder` in Java ?
 
 In Java, the primary difference between String and StringBuilder is mutability. 
