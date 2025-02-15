@@ -757,6 +757,133 @@ class Main {
 }
 ```
 
+## Java Generic Wildcard Error
+
+The issue with the following line:
+```java
+List<? extends Number> l1 = new ArrayList<? extends Number>();
+```
+Java does **not** allow using wildcard generics (`? extends Number`) in the instantiation of a generic object.
+
+### **Why is This an Error?**
+1. **Wildcard `? extends Number` is only for reference types, not instantiations**  
+   - When declaring `List<? extends Number>`, Java understands that `l1` can hold a list of objects that are **subtypes of `Number`** (e.g., `Integer`, `Double`).
+   - However, you **cannot** use `? extends Number` on the right-hand side (during object creation) because Java does not know what specific type to instantiate.
+   - Java expects a concrete type, such as `ArrayList<Number>` or `ArrayList<Integer>`, on the right-hand side.
+
+### **Corrected Code**
+#### **Solution 1: Use a Concrete Type for Instantiation**
+```java
+import java.util.List;
+import java.util.ArrayList;
+
+class Main {
+    public static void main(String[] args) {
+        List<? extends Number> l1 = new ArrayList<Number>(); // ✅ Correct
+    }
+}
+```
+Or, if you want a specific subtype:
+```java
+List<? extends Number> l1 = new ArrayList<Integer>(); // ✅ Also Correct
+```
+Here, `ArrayList<Integer>` is a valid instantiation because `Integer` extends `Number`.
+
+#### **Solution 2: Use Explicit Generic Type Without Wildcard**
+If you want a list of `Number` itself:
+```java
+List<Number> l1 = new ArrayList<Number>(); // ✅ Works fine
+```
+
+---
+
+
+## ❌ Compilation Error: Invariant Generic Type Mismatch (`List<Number> ≠ List<Integer>)`
+
+### **Understanding the Compilation Error in Code**
+```java
+import java.util.List;
+import java.util.ArrayList;
+
+class Main {
+    public static void main(String[] args) {
+        List<Number> l1 = new ArrayList<Integer>(); // ❌ Compilation Error
+    }
+}
+```
+**This code will not compile** because Java **does not allow** assigning `ArrayList<Integer>` to `List<Number>`. 
+
+---
+
+## **1️⃣ Why Does It Fail? (Invariance in Generics)**
+In Java, **generics are invariant**. This means:
+- `List<Number>` **is not the same as** `List<Integer>`, even though `Integer` is a subclass of `Number`.
+- Java treats `List<Number>` and `List<Integer>` as completely **different types**.
+
+🚨 **Incorrect assumption:**  
+You might think `ArrayList<Integer>` is a `List<Number>` because `Integer extends Number`, but Java **does not allow this** for generic collections.
+
+---
+
+## **2️⃣ Example of Invariance Issue**
+If Java allowed:
+```java
+List<Number> l1 = new ArrayList<Integer>(); // Hypothetically allowed
+l1.add(10.5); // Adding a Double to a List<Integer>? ❌ Type Safety Violation!
+```
+🚨 **Problem:**  
+- `l1` is supposed to be a `List<Number>`, but internally, it's actually a `List<Integer>`.
+- If Java allowed this, someone could **add a `Double` (`10.5`)** into `l1`, which is actually an `ArrayList<Integer>`, **causing a runtime error**.
+
+✅ **Java prevents this at compile-time** to **ensure type safety**.
+
+---
+
+## **3️⃣ Correct Solutions**
+### ✅ **Solution 1: Use `List<? extends Number>`**
+If you need a `List` that can hold `Integer`, `Double`, etc., use a wildcard:
+```java
+List<? extends Number> l1 = new ArrayList<Integer>(); // ✅ Allowed
+```
+- **Why does this work?** `? extends Number` means **it can hold any subclass of `Number`**.
+- **Limitation:** You cannot add new elements except `null`.
+
+---
+
+### ✅ **Solution 2: Use `List<Number>` and Store `Integer` and `Double`**
+If you want to store both `Integer` and `Double`, declare it as `List<Number>` but initialize it with `ArrayList<Number>`:
+```java
+List<Number> l1 = new ArrayList<>(); // ✅ Works fine
+l1.add(10);     // Integer ✅
+l1.add(10.5);   // Double ✅
+System.out.println(l1); // Output: [10, 10.5]
+```
+- **Why does this work?** Since the list is explicitly declared as `List<Number>`, it can hold **both `Integer` and `Double`**.
+
+---
+
+### ✅ **Solution 3: Use `List<? super Integer>` for Adding Integers**
+If you need to **ensure only `Integer` (or its superclasses) can be added**, use `? super Integer`:
+```java
+List<? super Integer> l1 = new ArrayList<Number>(); // ✅ Allowed
+l1.add(10);  // ✅ Allowed
+// l1.add(10.5); // ❌ ERROR: Only Integers (or their superclasses) are allowed
+```
+- **Why does this work?**  
+  - `? super Integer` means **it can hold Integer and its superclasses** (`Number`, `Object`).
+  - **Allows adding integers** but prevents adding `Double`.
+
+---
+
+## **4️⃣ Summary**
+| **Code** | **Compiles?** | **Why?** |
+|-----------|------------|--------|
+| `List<Number> l1 = new ArrayList<Integer>();` | ❌ No | Generics are invariant (`List<Integer>` ≠ `List<Number>`) |
+| `List<? extends Number> l1 = new ArrayList<Integer>();` | ✅ Yes | Can hold any subtype of `Number`, but **cannot add elements** |
+| `List<Number> l1 = new ArrayList<>();` | ✅ Yes | Proper type matching (`List<Number>` for `ArrayList<Number>`) |
+| `List<? super Integer> l1 = new ArrayList<Number>();` | ✅ Yes | Allows adding `Integer`, but **not `Double`** |
+
+
 ## What is `String` and `StringBuilder` in Java ?
 
 In Java, the primary difference between String and StringBuilder is mutability. 
