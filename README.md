@@ -885,6 +885,45 @@ l1.add(10);  // ✅ Allowed
 
 Invariance means that even if one type is a subtype of another, generic types of those types do not inherently maintain the same relationship.
 
+Here’s a beautifully crafted question with relevant icons to make it visually appealing:  
+
+---
+
+## 🚀 **Java 8 Challenge: Remove Whitespaces from a String!** 🧑‍💻  
+
+🔹 **Task:** Write a **Java 8** program to remove all whitespace characters from a given string.  
+🔹 **Restrictions:** Use **Java 8 Stream API only** (No regex, no loops!).  
+🔹 **Input Example:** `"I am a Java developer"`  
+🔹 **Expected Output:** `"IamaJavadeveloper"`  
+
+✅ **Bonus Points if your code is concise and readable!**  
+
+**🔗 Hint:** Explore `.chars()`, `.filter()`, `.mapToObj()`, and `.collect(Collectors.joining())`.  
+
+💡 **Can you crack this challenge using Java 8 only?** Drop your solution below! ⬇️  
+
+---
+
+### Solution
+
+```java
+import java.util.stream.Collectors;
+
+public class Main {
+    public static void main(String[] args) {
+        String input = "I am a Java developer";
+
+        String result = input.chars()
+                .filter(c -> !Character.isWhitespace(c))
+                .mapToObj(c -> String.valueOf((char) c))
+                .collect(Collectors.joining());
+
+        System.out.println("Original String: " + input);
+        System.out.println("String without spaces: " + result);
+    }
+}
+```
+
 ## What is `String` and `StringBuilder` in Java ?
 
 In Java, the primary difference between String and StringBuilder is mutability. 
