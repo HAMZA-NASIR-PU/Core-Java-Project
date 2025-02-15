@@ -815,7 +815,7 @@ class Main {
 
 ---
 
-## **1️⃣ Why Does It Fail? (Invariance in Generics)**
+### **1️⃣ Why Does It Fail? (Invariance in Generics)**
 In Java, **generics are invariant**. This means:
 - `List<Number>` **is not the same as** `List<Integer>`, even though `Integer` is a subclass of `Number`.
 - Java treats `List<Number>` and `List<Integer>` as completely **different types**.
@@ -839,8 +839,8 @@ l1.add(10.5); // Adding a Double to a List<Integer>? ❌ Type Safety Violation!
 
 ---
 
-## **3️⃣ Correct Solutions**
-### ✅ **Solution 1: Use `List<? extends Number>`**
+### **3️⃣ Correct Solutions**
+#### ✅ **Solution 1: Use `List<? extends Number>`**
 If you need a `List` that can hold `Integer`, `Double`, etc., use a wildcard:
 ```java
 List<? extends Number> l1 = new ArrayList<Integer>(); // ✅ Allowed
@@ -850,7 +850,7 @@ List<? extends Number> l1 = new ArrayList<Integer>(); // ✅ Allowed
 
 ---
 
-### ✅ **Solution 2: Use `List<Number>` and Store `Integer` and `Double`**
+#### ✅ **Solution 2: Use `List<Number>` and Store `Integer` and `Double`**
 If you want to store both `Integer` and `Double`, declare it as `List<Number>` but initialize it with `ArrayList<Number>`:
 ```java
 List<Number> l1 = new ArrayList<>(); // ✅ Works fine
@@ -862,7 +862,7 @@ System.out.println(l1); // Output: [10, 10.5]
 
 ---
 
-### ✅ **Solution 3: Use `List<? super Integer>` for Adding Integers**
+#### ✅ **Solution 3: Use `List<? super Integer>` for Adding Integers**
 If you need to **ensure only `Integer` (or its superclasses) can be added**, use `? super Integer`:
 ```java
 List<? super Integer> l1 = new ArrayList<Number>(); // ✅ Allowed
@@ -875,7 +875,7 @@ l1.add(10);  // ✅ Allowed
 
 ---
 
-## **4️⃣ Summary**
+### **4️⃣ Summary**
 | **Code** | **Compiles?** | **Why?** |
 |-----------|------------|--------|
 | `List<Number> l1 = new ArrayList<Integer>();` | ❌ No | Generics are invariant (`List<Integer>` ≠ `List<Number>`) |
@@ -883,6 +883,7 @@ l1.add(10);  // ✅ Allowed
 | `List<Number> l1 = new ArrayList<>();` | ✅ Yes | Proper type matching (`List<Number>` for `ArrayList<Number>`) |
 | `List<? super Integer> l1 = new ArrayList<Number>();` | ✅ Yes | Allows adding `Integer`, but **not `Double`** |
 
+Invariance means that even if one type is a subtype of another, generic types of those types do not inherently maintain the same relationship.
 
 ## What is `String` and `StringBuilder` in Java ?
 
