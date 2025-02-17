@@ -1038,6 +1038,96 @@ Since Java removes generic type information at runtime (due to **type erasure**)
 - Arrays are covariant because **they have runtime type checks**.
 - Generics are invariant because **they rely on compile-time checks** and **type erasure** makes runtime checks impossible.
 
+## ✅ **Can an Interface Override Default Methods in Java?** 🎭  
+
+Yes! **An interface can override a default method** from a parent interface by:  
+1. **Providing a new default implementation**  
+2. **Making it abstract (forcing implementation in subclasses)**  
+
+---
+
+### 📌 **Example 1: Overriding a Default Method in Another Interface**  
+
+```java
+interface A {
+    default void show() {
+        System.out.println("Default show() from A");
+    }
+}
+
+interface B extends A {  // B extends A and overrides show()
+    @Override
+    default void show() {
+        System.out.println("Overridden default show() in B");
+    }
+}
+
+class C implements B { }
+
+public class InterfaceOverrideExample {
+    public static void main(String[] args) {
+        C obj = new C();
+        obj.show();  // Calls the overridden default method from B
+    }
+}
+```
+**Output:**  
+```
+Overridden default show() in B
+```
+🔹 **Why does this work?**  
+- Interface `B` extends `A` and **overrides the default method** with a new implementation.  
+- Class `C` implements `B`, so it inherits the overridden method from `B`.
+
+---
+
+### 📌 **Example 2: Making the Method Abstract Instead of Default**  
+
+If an interface wants to **remove the default method implementation**, it can **declare the method as abstract** to force subclasses to implement it.
+
+```java
+interface A {
+    default void show() {
+        System.out.println("Default show() from A");
+    }
+}
+
+interface B extends A {
+    void show(); // Making it abstract (no default implementation)
+}
+
+class C implements B {
+    @Override
+    public void show() {
+        System.out.println("Overridden show() in class C");
+    }
+}
+
+public class AbstractMethodExample {
+    public static void main(String[] args) {
+        C obj = new C();
+        obj.show();
+    }
+}
+```
+**Output:**  
+```
+Overridden show() in class C
+```
+🔹 **Why does this work?**  
+- Interface `B` **removes** the default method by declaring `show()` as **abstract**.  
+- Class `C` **must** implement `show()`, otherwise, it won’t compile.
+
+---
+
+### 🎯 **Key Takeaways**  
+✅ **An interface can override a default method from a parent interface.**  
+✅ It can **provide a new default implementation** or **make it abstract** to enforce implementation.  
+✅ If an interface extends multiple interfaces with the same default method, it **must** override it to resolve conflicts.  
+
+**🔹 Conclusion:** Interfaces in Java are powerful, allowing method inheritance while still providing control over default method behavior! 🚀
+
+
 ## What is `String` and `StringBuilder` in Java ?
 
 In Java, the primary difference between String and StringBuilder is mutability. 
