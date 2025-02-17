@@ -1038,6 +1038,99 @@ Since Java removes generic type information at runtime (due to **type erasure**)
 - Arrays are covariant because **they have runtime type checks**.
 - Generics are invariant because **they rely on compile-time checks** and **type erasure** makes runtime checks impossible.
 
+## 🔄 Multiple Inheritance in Java 🚀  
+
+#### ❓ What is Multiple Inheritance?  
+Multiple inheritance is a feature that allows a class to inherit from more than one parent class. This means the child class can acquire properties and behaviors from multiple sources.  
+
+#### ⚠️ Why Doesn't Java Support Multiple Inheritance with Classes?  
+Java **does not support multiple inheritance with classes** to avoid:  
+1. **Diamond Problem 🔷** – Ambiguity when two parent classes have the same method.  
+2. **Complexity ❗** – Managing dependencies from multiple parents can be confusing.  
+3. **Maintainability 🛠️** – Hard to track method calls and resolve conflicts.  
+
+#### ✅ How Java Achieves Multiple Inheritance  
+Java allows multiple inheritance using:  
+- **Interfaces 🎭** – A class can implement multiple interfaces.  
+- **Default Methods in Interfaces 🏗️** – Since Java 8, interfaces can have default method implementations.  
+
+#### 📌 Example of Multiple Inheritance using Interfaces  
+```java
+interface A {
+    void methodA();
+}
+
+interface B {
+    void methodB();
+}
+
+// Class implementing multiple interfaces
+class C implements A, B {
+    public void methodA() {
+        System.out.println("Method A from Interface A");
+    }
+
+    public void methodB() {
+        System.out.println("Method B from Interface B");
+    }
+}
+
+public class MultipleInheritanceExample {
+    public static void main(String[] args) {
+        C obj = new C();
+        obj.methodA();
+        obj.methodB();
+    }
+}
+```
+**Output:**  
+```
+Method A from Interface A  
+Method B from Interface B  
+```
+
+#### 🔷 What About Default Methods in Interfaces?  
+If two interfaces have the same default method, the implementing class must override it:  
+
+```java
+interface X {
+    default void show() {
+        System.out.println("Show from X");
+    }
+}
+
+interface Y {
+    default void show() {
+        System.out.println("Show from Y");
+    }
+}
+
+class Z implements X, Y {
+    @Override
+    public void show() {
+        System.out.println("Overridden show method in Z");
+    }
+}
+
+public class DefaultMethodExample {
+    public static void main(String[] args) {
+        Z obj = new Z();
+        obj.show(); // Resolves ambiguity
+    }
+}
+```
+**Output:**  
+```
+Overridden show method in Z
+```
+
+#### 🎯 Key Takeaways  
+✅ Java prevents **multiple inheritance of classes** to avoid complexity.  
+✅ Java allows **multiple inheritance using interfaces** to keep flexibility.  
+✅ If conflicts arise from **default methods**, the class must override them.  
+
+🔥 **Final Thought:** Java smartly avoids multiple inheritance issues while still providing flexibility through interfaces! 🚀
+
 ## ✅ **Overriding Default Methods in Java** 🚀  
 
 Yes, **default methods in interfaces can be overridden** in Java. This is useful when a class implements multiple interfaces that have default methods with the same name, leading to ambiguity.  
