@@ -1341,6 +1341,8 @@ Java generics rely on **type erasure**, which means that generic type parameters
 ### Workaround:
 If you need to use primitive types, use **wrapper classes** (`Integer`, `Double`, etc.) or **generic specialization** via `List<int[]>` (for arrays) or third-party libraries like **Eclipse Collections**.
 
+https://stackoverflow.com/questions/2721546/why-dont-java-generics-support-primitive-types
+
 ## What is `String` and `StringBuilder` in Java ?
 
 In Java, the primary difference between String and StringBuilder is mutability. 
