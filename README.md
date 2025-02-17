@@ -1307,6 +1307,39 @@ Overridden show() in class C
 
 **🔹 Conclusion:** Interfaces in Java are powerful, allowing method inheritance while still providing control over default method behavior! 🚀
 
+## ✅ Must the Parameterized Type of a Generic Class in Java Be a Reference Type?
+
+Yes, in Java, the parameterized type of a generic class **must be a reference type**. Java generics **do not support primitive types** like `int`, `double`, `char`, etc. Instead, you must use their wrapper classes (`Integer`, `Double`, `Character`, etc.), which are reference types.
+
+### Example:
+✅ **Allowed (Reference Type)**
+```java
+class Box<T> { 
+    private T value;
+    
+    public void setValue(T value) { this.value = value; }
+    public T getValue() { return value; }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Box<Integer> intBox = new Box<>(); // Integer (Wrapper class, reference type)
+        intBox.setValue(100);
+        System.out.println(intBox.getValue());
+    }
+}
+```
+
+❌ **Not Allowed (Primitive Type)**
+```java
+Box<int> intBox = new Box<>(); // Compilation Error ❌
+```
+
+### Why?  
+Java generics rely on **type erasure**, which means that generic type parameters are erased at runtime. Since primitive types do not have a common superclass (like `Object` for reference types), they cannot be used as type parameters.
+
+### Workaround:
+If you need to use primitive types, use **wrapper classes** (`Integer`, `Double`, etc.) or **generic specialization** via `List<int[]>` (for arrays) or third-party libraries like **Eclipse Collections**.
 
 ## What is `String` and `StringBuilder` in Java ?
 
