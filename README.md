@@ -1038,6 +1038,93 @@ Since Java removes generic type information at runtime (due to **type erasure**)
 - Arrays are covariant because **they have runtime type checks**.
 - Generics are invariant because **they rely on compile-time checks** and **type erasure** makes runtime checks impossible.
 
+## ✅ **Overriding Default Methods in Java** 🚀  
+
+Yes, **default methods in interfaces can be overridden** in Java. This is useful when a class implements multiple interfaces that have default methods with the same name, leading to ambiguity.  
+
+---
+
+### 📌 **How to Override a Default Method?**  
+A class that implements an interface can **override** its default method by providing its own implementation.  
+
+#### 📝 **Example: Overriding a Default Method**
+```java
+interface A {
+    default void show() {
+        System.out.println("Default show() from A");
+    }
+}
+
+class B implements A {
+    @Override
+    public void show() {
+        System.out.println("Overridden show() in class B");
+    }
+}
+
+public class OverrideDefaultMethod {
+    public static void main(String[] args) {
+        B obj = new B();
+        obj.show();  // Calls the overridden method
+    }
+}
+```
+**Output:**  
+```
+Overridden show() in class B
+```
+👉 Here, class `B` overrides the `show()` method of interface `A`.
+
+---
+
+### 🔥 **Handling Ambiguity in Multiple Interfaces**  
+If two interfaces have the **same default method**, the implementing class **must override it** to resolve ambiguity.  
+
+#### ⚠️ **Example: Resolving Conflict in Multiple Interfaces**  
+```java
+interface X {
+    default void display() {
+        System.out.println("Display from X");
+    }
+}
+
+interface Y {
+    default void display() {
+        System.out.println("Display from Y");
+    }
+}
+
+// Class implementing both interfaces
+class Z implements X, Y {
+    @Override
+    public void display() {
+        System.out.println("Overridden display() in class Z");
+    }
+}
+
+public class ConflictResolution {
+    public static void main(String[] args) {
+        Z obj = new Z();
+        obj.display();  // Resolves conflict
+    }
+}
+```
+**Output:**  
+```
+Overridden display() in class Z
+```
+🔹 **Why is this necessary?**  
+If `Z` doesn't override `display()`, Java **won't compile** because it can't decide which method to call.
+
+---
+
+### 🎯 **Key Takeaways**
+✅ **Default methods in interfaces can be overridden** in implementing classes.  
+✅ If multiple interfaces have the **same default method**, the implementing class **must override** it.  
+✅ Overriding default methods **resolves ambiguity** in multiple inheritance scenarios.  
+
+**🔹 Conclusion:** Default methods provide flexibility in Java, but overriding them helps maintain clarity and control! 🚀
+
 ## ✅ **Can an Interface Override Default Methods in Java?** 🎭  
 
 Yes! **An interface can override a default method** from a parent interface by:  
