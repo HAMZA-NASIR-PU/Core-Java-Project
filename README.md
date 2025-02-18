@@ -1343,6 +1343,110 @@ If you need to use primitive types, use **wrapper classes** (`Integer`, `Double`
 
 https://stackoverflow.com/questions/2721546/why-dont-java-generics-support-primitive-types
 
+## `super` keyword in Java
+
+The `super` keyword in Java is used **only for directly implemented interfaces and superclasses**. Here’s how it works in different contexts:
+
+---
+
+## **1️⃣ `super` in Classes (Inheritance)**
+When used in a class, `super` refers to the **immediate superclass**.
+
+### **Example:**
+```java
+class Parent {
+    void show() {
+        System.out.println("Parent show()");
+    }
+}
+
+class Child extends Parent {
+    @Override
+    void show() {
+        super.show();  // Calls Parent's show() method
+        System.out.println("Child show()");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Child obj = new Child();
+        obj.show();
+    }
+}
+```
+### **Output:**
+```
+Parent show()
+Child show()
+```
+- `super.show();` calls the `show()` method from the immediate superclass (`Parent`).
+- It **cannot** access methods from a grandparent class directly if the parent overrides them.
+
+---
+
+## **2️⃣ `super` in Interfaces (Default Methods)**
+When used in interfaces, `super` can be used to call **a default method of a directly implemented interface**.
+
+### **Example:**
+```java
+interface I1 {
+    default void show() {
+        System.out.println("I1 show()");
+    }
+}
+
+class C1 implements I1 {
+    @Override
+    public void show() {
+        I1.super.show();  // Calls I1's default method
+    }
+}
+```
+### **Key Rule:**
+You **must** explicitly name the interface (`I1.super.show();`) because Java does not have direct super-interface chaining like classes.
+
+---
+
+## **3️⃣ What Happens with Multiple Interfaces?**
+If a class implements multiple interfaces that have conflicting default methods, Java **forces** you to override the method explicitly.
+
+### **Example of Conflict:**
+```java
+interface I1 {
+    default void show() {
+        System.out.println("I1 show()");
+    }
+}
+
+interface I2 {
+    default void show() {
+        System.out.println("I2 show()");
+    }
+}
+
+class C1 implements I1, I2 {
+    @Override
+    public void show() {
+        I1.super.show();  // Resolving conflict
+    }
+}
+```
+### **Why is this necessary?**
+- Both `I1` and `I2` have `show()`, and Java **does not know which one to choose**.
+- The class **must** explicitly override `show()` and call the correct interface using `I1.super.show();` or `I2.super.show();`.
+
+---
+
+## **🚀 Conclusion**
+✅ `super` is only for:
+1. **The immediate superclass** (in class inheritance).
+2. **Directly implemented interfaces** (for calling default methods).
+
+❌ **It cannot be used for:**
+- Grandparent classes directly.
+- Indirectly inherited interfaces.
+
 ## What is `String` and `StringBuilder` in Java ?
 
 In Java, the primary difference between String and StringBuilder is mutability. 
