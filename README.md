@@ -1343,7 +1343,7 @@ If you need to use primitive types, use **wrapper classes** (`Integer`, `Double`
 
 https://stackoverflow.com/questions/2721546/why-dont-java-generics-support-primitive-types
 
-## `super` keyword in Java
+## <img src="https://user-images.githubusercontent.com/74038190/212257467-871d32b7-e401-42e8-a166-fcfd7baa4c6b.gif" width ="25" style="margin-bottom: -5px;"> `super` keyword in Java
 
 The `super` keyword in Java is used **only for directly implemented interfaces and superclasses**. Here’s how it works in different contexts:
 
@@ -1448,7 +1448,7 @@ class C1 implements I1, I2 {
 - Indirectly inherited interfaces.
 
 
-## Why Generic Type Instantiation Fails in Java: Solutions and Best Practices
+## <img src="https://user-images.githubusercontent.com/74038190/212257467-871d32b7-e401-42e8-a166-fcfd7baa4c6b.gif" width ="25" style="margin-bottom: -5px;"> Why Generic Type Instantiation Fails in Java: Solutions and Best Practices
 
 Why the following code is not working:
 
@@ -1506,7 +1506,7 @@ public class Main {
 ### Solution 2: Use Reflection (not recommended unless necessary)
 You can use reflection to instantiate the generic type, but this approach can be more complex and error-prone.
 
-## Handling Non-Default Constructible Types in C++ Templates: Best Practices and Solutions
+## <img src="https://user-images.githubusercontent.com/74038190/212257467-871d32b7-e401-42e8-a166-fcfd7baa4c6b.gif" width ="25" style="margin-bottom: -5px;"> Handling Non-Default Constructible Types in C++ Templates: Best Practices and Solutions
 
 In C++, if the type used in a template class does not have a default constructor, and you attempt to instantiate it using `T()`, the code will fail to compile. C++ templates are type-agnostic until they are instantiated with a specific type, so if the type doesn't meet the requirements (like having a default constructor), the error occurs at the point of instantiation.
 
@@ -1560,7 +1560,7 @@ error: no matching function for call to 'NoDefaultConstructor::NoDefaultConstruc
 ```
 --- 
 
-## Understanding Compile-Time Type Information in C++ vs. Java's Type Erasure: Key Differences and Practical Examples
+## <img src="https://user-images.githubusercontent.com/74038190/212257467-871d32b7-e401-42e8-a166-fcfd7baa4c6b.gif" width ="25" style="margin-bottom: -5px;"> Understanding Compile-Time Type Information in C++ vs. Java's Type Erasure: Key Differences and Practical Examples
 
 ### Compile-Time Type Information in C++
 
@@ -1657,7 +1657,13 @@ In summary, C++ templates offer more flexibility at the cost of potentially larg
 
 ---
 
-## What is `String` and `StringBuilder` in Java ?
+
+## <img src="https://user-images.githubusercontent.com/74038190/212257467-871d32b7-e401-42e8-a166-fcfd7baa4c6b.gif" width ="25" style="margin-bottom: -5px;"> Why super.super.method() is Not Allowed in Java
+
+https://www.baeldung.com/java-super-super-not-allowed
+
+
+## <img src="https://user-images.githubusercontent.com/74038190/212257467-871d32b7-e401-42e8-a166-fcfd7baa4c6b.gif" width ="25" style="margin-bottom: -5px;"> What is `String` and `StringBuilder` in Java ?
 
 In Java, the primary difference between String and StringBuilder is mutability. 
 String objects are immutable, meaning any modification creates a new String object, leading to increased memory usage. 
