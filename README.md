@@ -1685,6 +1685,12 @@ https://docs.oracle.com/javase/tutorial/java/generics/genMethods.html
 
 https://docs.oracle.com/javase/tutorial/java/generics/QandE/generics-questions.html
 
+## <img src="https://user-images.githubusercontent.com/74038190/212257467-871d32b7-e401-42e8-a166-fcfd7baa4c6b.gif" width ="25" style="margin-bottom: -5px;"> What are the differences between "generic" types in C++ and Java?
+
+https://stackoverflow.com/questions/996135/how-are-java-generics-different-from-c-templates-why-cant-i-use-int-as-a-par
+
+https://stackoverflow.com/questions/36347/what-are-the-differences-between-generic-types-in-c-and-java
+
 ## <img src="https://user-images.githubusercontent.com/74038190/212257467-871d32b7-e401-42e8-a166-fcfd7baa4c6b.gif" width ="25" style="margin-bottom: -5px;"> What is `String` and `StringBuilder` in Java ?
 
 In Java, the primary difference between String and StringBuilder is mutability. 
