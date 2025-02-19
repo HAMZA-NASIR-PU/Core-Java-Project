@@ -1658,10 +1658,32 @@ In summary, C++ templates offer more flexibility at the cost of potentially larg
 ---
 
 
-## <img src="https://user-images.githubusercontent.com/74038190/212257467-871d32b7-e401-42e8-a166-fcfd7baa4c6b.gif" width ="25" style="margin-bottom: -5px;"> Why super.super.method() is Not Allowed in Java
+## <img src="https://user-images.githubusercontent.com/74038190/212257467-871d32b7-e401-42e8-a166-fcfd7baa4c6b.gif" width ="25" style="margin-bottom: -5px;"> Why super.super.method() is Not Allowed in Java ?
 
 https://www.baeldung.com/java-super-super-not-allowed
 
+
+## <img src="https://user-images.githubusercontent.com/74038190/212257467-871d32b7-e401-42e8-a166-fcfd7baa4c6b.gif" width ="25" style="margin-bottom: -5px;"> Type Erasure in Java
+
+** To implement generics, the Java compiler applies type erasure to: Replace all type parameters in generic types with their bounds or Object if the type parameters 
+are unbounded.**
+
+## <img src="https://user-images.githubusercontent.com/74038190/212257467-871d32b7-e401-42e8-a166-fcfd7baa4c6b.gif" width ="25" style="margin-bottom: -5px;"> Why super keyword in generics is not allowed at class level ?
+
+https://stackoverflow.com/questions/37411256/why-super-keyword-in-generics-is-not-allowed-at-class-level
+
+## <img src="https://user-images.githubusercontent.com/74038190/212257467-871d32b7-e401-42e8-a166-fcfd7baa4c6b.gif" width ="25" style="margin-bottom: -5px;"> Erasure of Generic Types
+
+https://docs.oracle.com/javase/tutorial/java/generics/genTypes.html
+
+## <img src="https://user-images.githubusercontent.com/74038190/212257467-871d32b7-e401-42e8-a166-fcfd7baa4c6b.gif" width ="25" style="margin-bottom: -5px;"> Erasure of Generic Methods
+
+https://docs.oracle.com/javase/tutorial/java/generics/genMethods.html
+
+
+## <img src="https://user-images.githubusercontent.com/74038190/212257467-871d32b7-e401-42e8-a166-fcfd7baa4c6b.gif" width ="25" style="margin-bottom: -5px;"> Java Generics Questions and Answers
+
+https://docs.oracle.com/javase/tutorial/java/generics/QandE/generics-questions.html
 
 ## <img src="https://user-images.githubusercontent.com/74038190/212257467-871d32b7-e401-42e8-a166-fcfd7baa4c6b.gif" width ="25" style="margin-bottom: -5px;"> What is `String` and `StringBuilder` in Java ?
 
