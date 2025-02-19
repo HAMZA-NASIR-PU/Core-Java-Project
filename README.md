@@ -1691,6 +1691,53 @@ https://stackoverflow.com/questions/996135/how-are-java-generics-different-from-
 
 https://stackoverflow.com/questions/36347/what-are-the-differences-between-generic-types-in-c-and-java
 
+
+## <img src="https://user-images.githubusercontent.com/74038190/212257467-871d32b7-e401-42e8-a166-fcfd7baa4c6b.gif" width ="25" style="margin-bottom: -5px;"> What is reified Java Generics ?
+
+https://maciejwalkowiak.com/blog/java-reified-generics/
+
+## <img src="https://user-images.githubusercontent.com/74038190/212257467-871d32b7-e401-42e8-a166-fcfd7baa4c6b.gif" width ="25" style="margin-bottom: -5px;"> Template Instantiation in C++
+
+https://docs.oracle.com/cd/E19205-01/819-5267/bkafi/index.html
+
+## <img src="https://user-images.githubusercontent.com/74038190/212257467-871d32b7-e401-42e8-a166-fcfd7baa4c6b.gif" width ="25" style="margin-bottom: -5px;"> What are the differences between Generics in C# and Java... and Templates in C++?
+
+https://stackoverflow.com/questions/31693/what-are-the-differences-between-generics-in-c-sharp-and-java-and-templates-i?noredirect=1&lq=1
+
+My example code for understanding the difference between C++ Templates and Java Generics:
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class A {
+    public:
+    void foo() {
+        cout << "A::foo()" << endl;
+    }
+};
+
+class B {
+    public:
+};
+
+template <typename T>
+void print(T p1) {
+    p1.foo();
+}
+
+int main() {
+    A a1;
+    print(a1);
+    
+    // B b1;
+    // print(b1); // Compile-Time Error
+
+    return 0;
+}
+```
+
+
 ## <img src="https://user-images.githubusercontent.com/74038190/212257467-871d32b7-e401-42e8-a166-fcfd7baa4c6b.gif" width ="25" style="margin-bottom: -5px;"> What is `String` and `StringBuilder` in Java ?
 
 In Java, the primary difference between String and StringBuilder is mutability. 
