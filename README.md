@@ -1737,6 +1737,87 @@ int main() {
 }
 ```
 
+## ❌ What Happens If You Don’t Call `super()` First in Java?
+
+Java enforces constructor chaining from the subclass to the superclass to ensure the **base class is fully initialized before any initialization in the derived class occurs**.
+
+### 🔥 Rule:
+
+> In Java, **the call to the superclass constructor (`super(...)`) must be the first statement** in a subclass constructor. Otherwise, **the compiler will throw an error**.
+
+---
+
+## ✅ Correct Example: Super Constructor as First Line
+
+```java
+class Animal {
+    Animal(String name) {
+        System.out.println("Animal constructor called: " + name);
+    }
+}
+
+class Dog extends Animal {
+    Dog(String name) {
+        super(name); // ✅ This must be the first statement
+        System.out.println("Dog constructor called: " + name);
+    }
+}
+```
+
+### ✅ Output:
+
+```
+Animal constructor called: Buddy
+Dog constructor called: Buddy
+```
+
+🧠 **Explanation**: The superclass `Animal` is initialized first with `super(name)`, followed by the subclass `Dog`.
+
+---
+
+## ❌ Incorrect Example: Super Constructor Not First
+
+```java
+class Animal {
+    Animal(String name) {
+        System.out.println("Animal constructor called: " + name);
+    }
+}
+
+class Dog extends Animal {
+    Dog(String name) {
+        System.out.println("Dog constructor called: " + name); // ❌ This comes before super()
+        super(name); // ❌ Compile-time error
+    }
+}
+```
+
+### ❌ Compile-Time Error:
+
+```
+Constructor call must be the first statement in a constructor
+```
+
+---
+
+## ⚙️ Why This Rule Exists?
+
+* Ensures **object integrity** by fully constructing the base class before the derived class.
+* Prevents subclass code from operating on **partially constructed** objects.
+* Keeps object construction **predictable and safe**.
+
+---
+
+## 🧭 Key Takeaways
+
+| ✅ Do                                           | ❌ Don’t                                   |
+| ---------------------------------------------- | ----------------------------------------- |
+| Always call `super(...)` as the **first line** | Call `super(...)` after any statement     |
+| Use `super(...)` to initialize base class      | Forget to initialize superclass correctly |
+| Understand constructor chaining rules          | Assume Java reorders constructor logic    |
+
+---
+
 
 ## <img src="https://user-images.githubusercontent.com/74038190/212257467-871d32b7-e401-42e8-a166-fcfd7baa4c6b.gif" width ="25" style="margin-bottom: -5px;"> What is `String` and `StringBuilder` in Java ?
 
