@@ -1818,7 +1818,31 @@ Constructor call must be the first statement in a constructor
 
 ---
 
+## 🔍 Can a Static Method Be Inherited in a Derived Class in Java?
 
+Yes
+
+```java
+class A1 {
+    public static void func1() {
+        System.out.println("A1.func");
+    }
+}
+
+class A2 extends A1 {
+    public static void func2() {
+        System.out.println("A2.func");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        A1.func1();   // ✅ A1.func
+        A2.func1();   // ✅ A1.func (inherited, no redeclaration)
+        A2.func2();   // ✅ A2.func
+    }
+}
+```
 ## <img src="https://user-images.githubusercontent.com/74038190/212257467-871d32b7-e401-42e8-a166-fcfd7baa4c6b.gif" width ="25" style="margin-bottom: -5px;"> What is `String` and `StringBuilder` in Java ?
 
 In Java, the primary difference between String and StringBuilder is mutability. 
