@@ -1737,17 +1737,17 @@ int main() {
 }
 ```
 
-## ❌ What Happens If You Don’t Call `super()` First in Java?
+## <img src="https://user-images.githubusercontent.com/74038190/212257467-871d32b7-e401-42e8-a166-fcfd7baa4c6b.gif" width ="25" style="margin-bottom: -5px;"> What Happens If You Don’t Call `super()` First in Java?
 
 Java enforces constructor chaining from the subclass to the superclass to ensure the **base class is fully initialized before any initialization in the derived class occurs**.
 
-### 🔥 Rule:
+#### 🔥 Rule:
 
 > In Java, **the call to the superclass constructor (`super(...)`) must be the first statement** in a subclass constructor. Otherwise, **the compiler will throw an error**.
 
 ---
 
-## ✅ Correct Example: Super Constructor as First Line
+### ✅ Correct Example: Super Constructor as First Line
 
 ```java
 class Animal {
@@ -1764,7 +1764,7 @@ class Dog extends Animal {
 }
 ```
 
-### ✅ Output:
+#### ✅ Output:
 
 ```
 Animal constructor called: Buddy
@@ -1775,7 +1775,7 @@ Dog constructor called: Buddy
 
 ---
 
-## ❌ Incorrect Example: Super Constructor Not First
+### ❌ Incorrect Example: Super Constructor Not First
 
 ```java
 class Animal {
@@ -1792,7 +1792,7 @@ class Dog extends Animal {
 }
 ```
 
-### ❌ Compile-Time Error:
+#### ❌ Compile-Time Error:
 
 ```
 Constructor call must be the first statement in a constructor
@@ -1800,7 +1800,7 @@ Constructor call must be the first statement in a constructor
 
 ---
 
-## ⚙️ Why This Rule Exists?
+### ⚙️ Why This Rule Exists?
 
 * Ensures **object integrity** by fully constructing the base class before the derived class.
 * Prevents subclass code from operating on **partially constructed** objects.
@@ -1808,7 +1808,7 @@ Constructor call must be the first statement in a constructor
 
 ---
 
-## 🧭 Key Takeaways
+### 🧭 Key Takeaways
 
 | ✅ Do                                           | ❌ Don’t                                   |
 | ---------------------------------------------- | ----------------------------------------- |
@@ -1818,7 +1818,7 @@ Constructor call must be the first statement in a constructor
 
 ---
 
-## 🔍 Can a Static Method Be Inherited in a Derived Class in Java?
+## <img src="https://user-images.githubusercontent.com/74038190/212257467-871d32b7-e401-42e8-a166-fcfd7baa4c6b.gif" width ="25" style="margin-bottom: -5px;"> Can a Static Method Be Inherited in a Derived Class in Java?
 
 Yes
 
@@ -1843,6 +1843,173 @@ public class Main {
     }
 }
 ```
+---
+
+Sure! Here's a well-structured article explaining the compilation errors in your Java code with detailed technical reasoning.
+
+---
+
+## <img src="https://user-images.githubusercontent.com/74038190/212257467-871d32b7-e401-42e8-a166-fcfd7baa4c6b.gif" width ="25" style="margin-bottom: -5px;"> Understanding Java Method Overriding vs Hiding: Why Your Code Fails to Compile
+
+Java developers often encounter confusion when dealing with **static** and **non-static methods**, especially when inheritance and overriding come into play. Let's break down the provided code and pinpoint exactly **why it fails to compile**, with insights into how Java handles method binding.
+
+---
+
+### 🧾 The Code in Question
+
+```java
+// Parent class
+class Base {
+
+  // non-static method
+  public int add(int a, int b) {
+    System.out.println("In the base class.");
+    return a + b;
+  }
+
+  // static method
+  public static void print() {
+    System.out.println("In the Base class.");
+  }
+}
+
+// Child class
+class Derived extends Base {
+
+  // ❌ Compilation error if added 'static'
+  public static int add(int a, int b) {
+    System.out.println("In the child class.");
+    return a + b;
+  }
+
+  // ❌ Compilation error if removed 'static'
+  public void print() {
+    System.out.println("In the child class.");
+  }
+}
+```
+
+---
+
+### 🚨 Compilation Errors Explained
+
+#### ❌ Error 1: Attempting to "Override" a Non-Static Method with a Static One
+
+```java
+public static int add(int a, int b)
+```
+
+* The method `add()` in `Base` is **non-static**.
+* In `Derived`, you’re trying to **declare a static method with the same signature**.
+* In Java, **static methods belong to the class**, not to the instance.
+* Therefore, a static method **cannot override** a non-static method. This causes a **compilation error**:
+
+  ```
+  error: add(int,int) in Derived cannot override add(int,int) in Base
+    overridden method is not static
+  ```
+
+> ✅ **Fix**: Either remove the `static` keyword or rename the method if static behavior is needed separately.
+
+---
+
+### ❌ Error 2: Attempting to "Override" a Static Method with a Non-Static One
+
+```java
+public void print()
+```
+
+* The `print()` method in `Base` is **static**.
+* In `Derived`, you're trying to **declare a non-static method with the same name**.
+* Similar to above, **non-static methods cannot override static ones**.
+* This also results in a **compilation error**:
+
+  ```
+  error: print() in Derived cannot override print() in Base
+    overridden method is static
+  ```
+
+> ✅ **Fix**: Keep the method static if you intend to **hide** the static method, or rename it if you need a separate instance method.
+
+---
+
+### 🤔 Static vs Non-Static: What’s the Real Difference?
+
+| Feature      | Static Methods                        | Instance Methods |
+| ------------ | ------------------------------------- | ---------------- |
+| Bound At     | Compile-time                          | Runtime          |
+| Belongs To   | Class                                 | Object           |
+| Overridable? | ❌ No (Can be hidden)                  | ✅ Yes            |
+| Accessed Via | ClassName.method() or object.method() | object.method()  |
+
+---
+
+### ✅ Corrected Code
+
+Here’s how the code can be **refactored to compile correctly**:
+
+```java
+class Base {
+  public int add(int a, int b) {
+    System.out.println("In the base class.");
+    return a + b;
+  }
+
+  public static void print() {
+    System.out.println("In the Base class.");
+  }
+}
+
+class Derived extends Base {
+  @Override
+  public int add(int a, int b) {
+    System.out.println("In the child class.");
+    return a + b;
+  }
+
+  public static void print() {
+    System.out.println("In the child class.");
+  }
+}
+
+public class Main {
+  public static void main(String args[]) {
+    Base obj = new Derived();
+
+    // Calls Derived's add() method - Runtime polymorphism
+    System.out.println(obj.add(4, 5));
+
+    // Calls Base's print() method - Static binding
+    obj.print();
+  }
+}
+```
+
+---
+
+### 🔍 Output of the Corrected Program
+
+```
+In the child class.
+9
+In the Base class.
+```
+
+> Notice how `print()` is still resolved to the `Base` version. That’s because static methods use **compile-time binding** based on the reference type (`Base obj`).
+
+---
+
+### 🧩 Conclusion
+
+* ✔️ **Instance methods can be overridden**.
+* ❌ **Static methods cannot be overridden** — they can only be **hidden**.
+* ❌ **Mixing static/non-static between base and derived methods of the same name** leads to compilation errors.
+
+Understanding these distinctions is **crucial for mastering polymorphism and inheritance** in Java. Always pay attention to the method types when designing class hierarchies!
+
+---
+
+
 ## <img src="https://user-images.githubusercontent.com/74038190/212257467-871d32b7-e401-42e8-a166-fcfd7baa4c6b.gif" width ="25" style="margin-bottom: -5px;"> What is `String` and `StringBuilder` in Java ?
 
 In Java, the primary difference between String and StringBuilder is mutability. 
