@@ -2196,3 +2196,4 @@ Additionally, StringBuilder is generally faster than StringBuffer, as it is not 
 For more Info: https://www.unlogged.io/post/java-and-the-string-odyssey-navigating-changes-from-jdk-1-to-jdk-21
 
 - https://stackoverflow.com/questions/1882584/what-is-a-covariant-return-type
+- https://docs.oracle.com/javase/tutorial/java/IandI/abstract.html
