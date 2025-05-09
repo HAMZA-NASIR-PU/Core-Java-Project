@@ -2185,6 +2185,43 @@ Let your constructors **talk to each other** efficiently—and your future self 
 
 ---
 
+## <img src="https://user-images.githubusercontent.com/74038190/212257467-871d32b7-e401-42e8-a166-fcfd7baa4c6b.gif" width ="25" style="margin-bottom: -5px;"> Some Important Code Examples
+
+```java
+class ClassA {
+    public void methodOne(int i) {
+    }
+    public void methodTwo(int i) {
+    }
+    public void methodThree(int i) {
+    }
+    public static void methodFour(int i) {
+        System.out.println("ClassA");
+    }
+}
+
+class ClassB extends ClassA {
+    public void methodOne(int i) {
+    }
+    public void methodTwo(int i) {
+    }
+    public void methodThree(int i) {
+    }
+    public static void methodFour(int i) {
+        System.out.println("ClassB");
+    }
+}
+
+
+public class Main {
+    public static void main(String[] args) {
+        ClassA obj = new ClassB();
+        obj.methodFour(1);
+        ((ClassB)obj).methodFour(1);
+    }
+}
+```
+
 
 ## <img src="https://user-images.githubusercontent.com/74038190/212257467-871d32b7-e401-42e8-a166-fcfd7baa4c6b.gif" width ="25" style="margin-bottom: -5px;"> What is `String` and `StringBuilder` in Java ?
 
