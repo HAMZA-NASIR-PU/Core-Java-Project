@@ -26,5 +26,9 @@ public class Main {
         System.out.println(entry.getKey() + " --> " + entry.getValue());
       }
 
+      // Single line solution
+      // Map<String, Long> mp = logs.stream().collect(Collectors.groupingBy(log -> log, Collectors.counting()));
+      // Map<String, Long> mp = logs.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
     }
 }
