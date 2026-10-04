@@ -31,6 +31,14 @@ public class Main {
       // Single line solution
       // Map<String, Long> mp = logs.stream().collect(Collectors.groupingBy(log -> log, Collectors.counting()));
       // Map<String, Long> mp = logs.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+      // Using Collectors.toMap
+      Map<String, Integer> mp = logs.stream().collect(
+        Collectors.toMap(
+          Function.identity(),
+          log -> 1,
+          (a, b) -> a + 1
+        )
+      );
 
     }
 }
