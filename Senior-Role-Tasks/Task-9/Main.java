@@ -1,3 +1,6 @@
+//
+// Collection of exercises for understanding Collector.
+//
 import java.util.*;
 import java.util.stream.*;
 import java.util.function.*;

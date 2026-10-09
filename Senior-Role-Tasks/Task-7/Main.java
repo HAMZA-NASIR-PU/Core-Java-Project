@@ -73,6 +73,15 @@ public class Main {
         System.out.println(entry.getKey() + " --> " + entry.getValue());
       }
 
+      System.out.println("\n\n");
+
+      // Total salary
+      System.out.println(
+        employees.stream().collect(
+          Collectors.summingDouble(Employee::getSalary)
+        )
+      );
+
     }
 }
 
