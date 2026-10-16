@@ -59,8 +59,8 @@ public class Main {
             .sorted(Map.Entry.comparingByValue())
             .collect(
                 Collectors.toMap(
-                    Map.Entry::getKey,
-                    Map.Entry::getValue,
+                    Map.Entry::getKey, // entry ->  entry.getKey()
+                    Map.Entry::getValue, // entry -> entry.getValue()
                     (a, b) -> a,
                     LinkedHashMap::new
                 )
